@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+//123
 var app = getApp()
 Page({
   data: {
