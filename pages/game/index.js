@@ -19,7 +19,7 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    this.showStage();
+    this.preloadImgs();
   },
   onReady: function () {
     // 页面渲染完成
@@ -109,7 +109,9 @@ Page({
     var count = 0;
     var that = this;
     var imgs = this.getImages();
-    var preLoadRes = [imgs.jd, imgs.jdWin, imgs.jdLose, imgs.st, imgs.stWin, imgs.stLose, imgs.bu, imgs.buWin, imgs.buLose];
+    //var preLoadRes = [imgs.jd, imgs.jdWin, imgs.jdLose, imgs.st, imgs.stWin, imgs.stLose, imgs.bu, imgs.buWin, imgs.buLose];
+    var preLoadRes = ["card1", "card2", "card3", "card4", "card5", "card6", "card7", "card8", "card9", "card10", "card11", "card12",                           "card13", "card14", "card15", "card16", "card17", "card18", "card19", "card20", "card21", "card22", "card23",                            "card24", "card25", "card26", "card27", "card28", "card29", "card30", "card31", "card32", "card33", "card34",                            "card35", "card36", "card37", "card38", "card39", "card40", "card41", "card42", "card43", "card44", "card45",                            "card46", "card47", "card48", "card49", "card50", "card51", "card52", "card53", "card54"
+                  ];
     for (var i = 0; i < preLoadRes.length; i++) {
       wx.request({
         url: preLoadRes[i],
@@ -183,9 +185,9 @@ Page({
   play: function (event) {//点击剪刀石头布图片开始游戏
     var that = this;
     var playerVal = parseInt(event.currentTarget.dataset.val);//获取代表剪刀石头布的数字
-    var randomVal1 = parseInt(Math.random() * 54 + 1, 10);//随机生成1-3的整数
-    var randomVal2 = parseInt(Math.random() * 54 + 1, 10);//随机生成1-3的整数
-    var randomVal3 = parseInt(Math.random() * 54 + 1, 10);//随机生成1-3的整数
+    var randomVal1 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
+    var randomVal2 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
+    var randomVal3 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
     var result = this.getResult(playerVal, randomVal1, randomVal2, randomVal3);
     that.beforePlay();
     wx.showToast({
@@ -203,7 +205,7 @@ Page({
   },
   setResultImg: function (state, player, pc1, pc2, pc3) {//设置比赛结果显示对应的输赢图片
     var imgs = this.getImages();
-    var imgName = ["card1", "card2", "card3", "card4", "card5", "card6", "card7", "card8", "card9", "card10", "card11", "card12",                           "card13", "card14", "card15", "card16", "card17", "card18", "card19", "card20", "card21", "card22", "card23",                            "card24", "card25", "card26", "card27", "card28", "card29", "card30", "card31", "card32", "card33", "card34",                            "card35", "card36", "card37", "card38", "card39", "card40", "card41", "card42", "card43", "card44", "card45",                            "card46", "card47", "card48", "card49", "card50", "card51", "card52", "card53", "card54"
+    var imgName = ["card1", "card3", "card4", "card5", "card6", "card7", "card8", "card9", "card10", "card11", "card12",                           "card14", "card15", "card16", "card17", "card18", "card19", "card20", "card21", "card22", "card23",                            "card24", "card25", "card26", "card27", "card28", "card29", "card30", "card31", "card32", "card33", "card34",                            "card35", "card36", "card37", "card38", "card39", "card40", "card41", "card42", "card43", "card44", "card45",                            "card46", "card47", "card48", "card49", "card50", "card51", "card52", "card53", "card54"
                   ];
     var playerImg = imgName[player - 1];
     var pcImg1 = imgName[pc1 - 1];
