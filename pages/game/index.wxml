@@ -1,0 +1,23 @@
+<!--pages/game/index.wxml-->
+<view hidden="{{progressHidden}}" class="progress">
+    <progress percent="{{percent}}" show-info active />
+    <text>资源加载中...</text>
+</view>
+<view hidden="{{stageHidden}}" class="stage">
+    <view class="choice flex space-between">
+        <image bindtap="play" data-val='1' src=""></image>
+        <image bindtap="play" data-val='2' src="../images/st.png"></image>
+        <image bindtap="play" data-val='1' src=""></image>
+    </view>
+    <view style="{{sayWordsAnimation}}"  class="say-words">{{sayWords}}</view>
+    <view class="result">
+        <view class="choice flex space-between">
+            <image src="{{pcImg1}}"></image>
+            <image src="{{pcImg2}}"></image>
+            <image src="{{pcImg3}}"></image>
+        </view>
+    </view>
+    <view hidden="{{maskHidden}}" class="mask"></view>
+</view>
+
+
