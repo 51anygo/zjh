@@ -4,12 +4,16 @@
     <text>资源加载中...</text>
 </view>
 <view hidden="{{stageHidden}}" class="stage">
+    <view class="score ">
+            <view>第<view class="win-num">{{winNum}}</view>局</view>
+            <!--<view>连续获胜<view style="{{winNumAnimation}}" class="win-num">{{successionWinNum}}</view>次！</view>-->
+    </view>
     <view class="choice flex space-between">
         <image bindtap="play" data-val='1' src=""></image>
         <image bindtap="play" data-val='2' src="../images/st.png"></image>
         <image bindtap="play" data-val='1' src=""></image>
     </view>
-    <view style="{{sayWordsAnimation}}"  class="say-words">{{sayWords}}</view>
+    <view style="{{sayWordsAnimation}}"  class="say-words">{{sayWords1}}</view>
     <view class="result">
         <view class="choice flex space-between">
             <image src="{{pcImg1}}"></image>

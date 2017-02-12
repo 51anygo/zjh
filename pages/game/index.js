@@ -190,6 +190,16 @@ Page({
     var randomVal1 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
     var randomVal2 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
     var randomVal3 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
+    console.log("before",randomVal1,randomVal2,randomVal3);
+    for (var i = 0 ; i < 9999; i++) {
+       if(randomVal2 != randomVal1) break;
+       randomVal2 = parseInt(Math.random() * 52 + 1, 10);
+    }
+    for (var i = 0 ; i < 9999; i++) {
+       if(randomVal3 != randomVal1 && randomVal3 != randomVal2) break;
+       randomVal3 = parseInt(Math.random() * 52 + 1, 10);
+    }
+    console.log("after",randomVal1,randomVal2,randomVal3);
     var result = this.getResult(playerVal, randomVal1, randomVal2, randomVal3);
     that.beforePlay();
     wx.showToast({
