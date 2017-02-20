@@ -136,6 +136,19 @@ Page({
       progressHidden: true,
     });
   },
+  seededRandom: function (seed, count, max, min) { 
+      max = max || 1;
+      min = min || 0;
+      var i=0;
+      while(i < count)
+      {
+        seed = (seed * 9301 + 49297) % 233280;
+        i++;
+      }
+      var rnd = seed / 233280.0; 
+      return min + rnd * (max - min);    
+
+  },
   getResult: function (a, b) {//获取猜拳结果
     /*
     定义剪刀==1，石头==2，布==3
@@ -187,32 +200,37 @@ Page({
   play: function (event) {//点击剪刀石头布图片开始游戏
     var that = this;
     var playerVal = parseInt(event.currentTarget.dataset.val);//获取代表剪刀石头布的数字
-    var randomVal1 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
-    var randomVal2 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
-    var randomVal3 = parseInt(Math.random() * 52 + 1, 10);//随机生成1-3的整数
-    console.log("before",randomVal1,randomVal2,randomVal3);
-    for (var i = 0 ; i < 9999; i++) {
-       if(randomVal2 != randomVal1) break;
-       randomVal2 = parseInt(Math.random() * 52 + 1, 10);
+    var randomVal1 = parseInt(Math.random(1000) * 52 + 1, 10);//随机生成1-3的整数
+    var randomVal2 = parseInt(Math.random(1000) * 52 + 1, 10);//随机生成1-3的整数
+    var randomVal3 = parseInt(Math.random(1000) * 52 + 1, 10);//随机生成1-3的整数
+    //console.log("before",randomVal1,randomVal2,randomVal3);
+    for (var i = 0; i < 9999; i++) {
+      if (randomVal2 != randomVal1) break;
+      randomVal2 = parseInt(Math.random(1000) * 52 + 1, 10);
     }
-    for (var i = 0 ; i < 9999; i++) {
-       if(randomVal3 != randomVal1 && randomVal3 != randomVal2) break;
-       randomVal3 = parseInt(Math.random() * 52 + 1, 10);
+    for (var i = 0; i < 9999; i++) {
+      if (randomVal3 != randomVal1 && randomVal3 != randomVal2) break;
+      randomVal3 = parseInt(Math.random(1000) * 52 + 1, 10);
     }
-    console.log("after",randomVal1,randomVal2,randomVal3);
+    //console.log("after",randomVal1,randomVal2,randomVal3);
     var result = this.getResult(playerVal, randomVal1, randomVal2, randomVal3);
     that.beforePlay();
+    var nowTime = Date.now();
+    var leftTime = 600;//(10000 - (nowTime%10000));
+    var seed = parseInt(nowTime/10000, 10);
     wx.showToast({
       title: '随机生成牌中...',
-      icon: 'loading'
+      icon: 'loading',
+      duration: leftTime
     });
+    console.log("nowTime:", nowTime, "leftTime:", leftTime, "seededRandom:", parseInt(this.seededRandom(seed, 1) * 52 + 1, 10), "," , parseInt(this.seededRandom(seed, 2) * 52 + 1, 10));
     setTimeout(function () {
       wx.hideToast();
       that.setResultImg(result, playerVal, randomVal1, randomVal2, randomVal3);
       that.setData({
         maskHidden: true
       });
-    }, 600)
+    }, leftTime)
 
   },
   setResultImg: function (state, player, pc1, pc2, pc3) {//设置比赛结果显示对应的输赢图片
